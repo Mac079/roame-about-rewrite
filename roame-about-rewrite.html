@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROAME About Page Rewrite by The Silk Pen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white:#fdfcf9;--sand:#f2ece0;--linen:#e8dfd0;--warm:#d4c8b4;
+      --ocean:#1e3a4f;--deep:#152838;--terracotta:#c4724a;--spice:#9c5238;
+      --bark:#6b5840;--muted:#8a7a68;--border:#ddd4c0;--gold:#b89a6a;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{overflow-x:hidden}
+    a,button,input,p,h1,h2,h3,h4,span,div{min-width:0}
+    body{background:var(--white);color:var(--deep);font-family:'Jost',sans-serif;font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    .top-bar{background:var(--ocean);color:rgba(255,255,255,.55);text-align:center;font-size:10px;font-weight:300;letter-spacing:.22em;padding:9px;text-transform:uppercase}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:58px;border-bottom:1px solid var(--border);background:var(--white);position:sticky;top:0;z-index:100}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--deep);text-decoration:none;opacity:.5;transition:opacity .2s}
+    .nav-links a:hover{opacity:1}
+    .nav-logo{font-family:'Cormorant',serif;font-size:22px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:var(--deep);position:absolute;left:50%;transform:translateX(-50%)}
+    .nav-right{display:flex;gap:24px;list-style:none}
+    .nav-right a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--deep);text-decoration:none;opacity:.4}
+
+    /* HERO */
+    .hero{min-height:88vh;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+    .hero-visual{background:var(--ocean);position:relative;overflow:hidden}
+    .hero-visual-inner{position:absolute;inset:0;background:linear-gradient(155deg,#2a4a60 0%,#152838 100%)}
+    .hero-visual-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 35% 65%,rgba(196,114,74,.2) 0%,transparent 55%)}
+    .hero-visual-caption{position:absolute;bottom:36px;left:36px;font-family:'Cormorant',serif;font-style:italic;font-size:13px;font-weight:300;color:rgba(255,255,255,.3);letter-spacing:.06em}
+    .hero-content{display:flex;flex-direction:column;justify-content:center;padding:80px 72px 80px 56px;border-left:1px solid var(--border)}
+    .hero-overline{font-size:10px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--terracotta);margin-bottom:24px;opacity:.9}
+    .hero-headline{font-family:'Cormorant',serif;font-size:clamp(40px,4.8vw,64px);font-weight:300;line-height:1.06;color:var(--deep);margin-bottom:30px;letter-spacing:.01em}
+    .hero-headline em{font-style:italic;color:var(--bark)}
+    .hero-body{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.85;color:var(--bark);max-width:440px;margin-bottom:44px}
+    .hero-cta{display:flex;gap:24px;align-items:center}
+    .btn-ocean{background:var(--ocean);color:var(--white);font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;padding:14px 32px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s}
+    .btn-ocean:hover{background:var(--deep)}
+    .btn-text{font-size:10px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--deep);text-decoration:none;border-bottom:1px solid var(--deep);padding-bottom:2px;opacity:.45}
+
+    /* HOLLIE QUOTE */
+    .hollie-quote{background:var(--linen);padding:88px 80px;display:grid;grid-template-columns:220px 1fr;gap:80px;align-items:center;border-bottom:1px solid var(--border)}
+    .hollie-left .hollie-eyebrow{font-size:10px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+    .hollie-left .hollie-name{font-family:'Cormorant',serif;font-size:18px;font-weight:300;color:var(--deep);margin-bottom:4px}
+    .hollie-left .hollie-title{font-size:10px;font-weight:300;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    .hollie-quote-text{font-family:'Cormorant',serif;font-size:clamp(22px,2.6vw,34px);font-weight:300;font-style:italic;line-height:1.42;color:var(--deep);padding-left:64px;border-left:1px solid var(--border)}
+
+    /* ORIGIN */
+    .origin{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+    .origin-visual{background:var(--terracotta);position:relative;min-height:520px;overflow:hidden}
+    .origin-visual-inner{position:absolute;inset:0;background:linear-gradient(145deg,#c4724a 0%,#8c4a32 100%)}
+    .origin-visual-word{position:absolute;bottom:36px;left:36px;font-family:'Cormorant',serif;font-style:italic;font-size:clamp(56px,8vw,112px);font-weight:300;color:rgba(255,255,255,.12);line-height:1;letter-spacing:.02em}
+    .origin-content{padding:80px 72px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
+    .section-label{font-size:10px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--terracotta);margin-bottom:24px;opacity:.9}
+    .section-headline{font-family:'Cormorant',serif;font-size:clamp(28px,3vw,42px);font-weight:300;line-height:1.1;color:var(--deep);margin-bottom:28px}
+    .section-headline em{font-style:italic}
+    .section-body{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;line-height:1.9;color:var(--bark);margin-bottom:20px}
+    .section-body strong{font-weight:400;color:var(--deep)}
+
+    /* PRINT PHILOSOPHY - dark ocean */
+    .print-philosophy{background:var(--ocean);padding:88px 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .print-item{padding:0 48px 0 0;border-right:1px solid rgba(255,255,255,.08)}
+    .print-item:first-child{padding-left:0}
+    .print-item:last-child{border-right:none;padding-right:0;padding-left:48px}
+    .print-item:nth-child(2){padding:0 48px}
+    .print-location{font-size:10px;font-weight:300;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:.8}
+    .print-title{font-family:'Cormorant',serif;font-size:22px;font-weight:300;color:var(--white);margin-bottom:14px;letter-spacing:.01em}
+    .print-body{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.42)}
+
+    /* THE ROAME WOMAN */
+    .woman-section{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+    .woman-visual{background:var(--sand);position:relative;min-height:540px}
+    .woman-visual-inner{position:absolute;inset:0;background:linear-gradient(145deg,#e8dfd0 0%,#d4c8b4 100%);display:flex;align-items:flex-end;padding:36px}
+    .woman-visual-tag{font-family:'Cormorant',serif;font-style:italic;font-size:13px;font-weight:300;color:rgba(28,40,56,.35)}
+    .woman-content{padding:80px 72px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
+
+    /* CRAFT STRIP */
+    .craft-strip{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border)}
+    .craft-item{padding:52px 44px;border-right:1px solid var(--border)}
+    .craft-item:last-child{border-right:none}
+    .craft-icon{width:24px;height:1px;background:var(--gold);margin-bottom:20px}
+    .craft-title{font-family:'Cormorant',serif;font-size:22px;font-weight:300;color:var(--deep);margin-bottom:12px}
+    .craft-body{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;font-weight:300;line-height:1.8;color:var(--bark)}
+
+    /* NEWSLETTER */
+    .newsletter{background:var(--ocean);padding:88px 80px;display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center}
+    .newsletter-label{font-size:10px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px}
+    .newsletter-headline{font-family:'Cormorant',serif;font-size:clamp(26px,3vw,38px);font-weight:300;line-height:1.12;color:var(--white);margin-bottom:18px}
+    .newsletter-headline em{font-style:italic;color:rgba(255,255,255,.5)}
+    .newsletter-body{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;font-weight:300;line-height:1.88;color:rgba(255,255,255,.45)}
+    .newsletter-form{display:flex;flex-direction:column;gap:10px}
+    .newsletter-form input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--white);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;padding:15px 18px;outline:none;transition:border-color .2s}
+    .newsletter-form input::placeholder{color:rgba(255,255,255,.22)}
+    .newsletter-form input:focus{border-color:var(--gold)}
+    .newsletter-form button{background:var(--terracotta);color:var(--white);font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;padding:15px;border:none;cursor:pointer;transition:background .2s}
+    .newsletter-form button:hover{background:var(--spice)}
+    .newsletter-note{font-size:11px;font-weight:300;color:rgba(255,255,255,.22);line-height:1.6;letter-spacing:.03em}
+
+    /* COPY NOTES */
+    .copy-notes{padding:80px;border-top:2px solid var(--deep);background:var(--sand)}
+    .notes-header{display:flex;align-items:baseline;gap:16px;margin-bottom:52px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+    .notes-badge{font-size:10px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta);opacity:.85}
+    .notes-title{font-family:'Cormorant',serif;font-size:24px;font-weight:300;color:var(--deep)}
+    .notes-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--muted);margin-left:auto}
+    .notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px 64px}
+    .note-item h4{font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--deep);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+    .note-item p{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;line-height:1.9;color:var(--bark)}
+
+    /* BEFORE AFTER */
+    .before-after{padding:0 80px 80px;background:var(--sand)}
+    .ba-label{font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;padding-top:4px}
+    .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .ba-card{padding:28px 32px;border:1px solid var(--border);background:var(--white)}
+    .ba-tag{display:inline-block;font-size:9px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;padding:5px 10px;margin-bottom:16px}
+    .ba-tag.before{background:var(--linen);color:var(--muted)}
+    .ba-tag.after{background:var(--ocean);color:var(--white)}
+    .ba-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;font-weight:300;line-height:1.8;color:var(--deep)}
+    .ba-note{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;font-weight:300;color:var(--muted);line-height:1.7;letter-spacing:.03em}
+
+    /* FOOTER */
+    .footer-bar{background:var(--deep);padding:22px 80px;display:flex;align-items:center;justify-content:space-between}
+    .footer-brand{font-family:'Cormorant',serif;font-style:italic;font-size:17px;font-weight:300;color:rgba(255,255,255,.85)}
+    .footer-note{font-size:10px;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+    .footer-contact{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+    .footer-email{font-size:11px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;letter-spacing:.05em}
+    .footer-website{font-size:11px;font-weight:300;color:rgba(255,255,255,.3);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:1px;letter-spacing:.05em;transition:color .2s}
+    .footer-website:hover{color:rgba(255,255,255,.65)}
+
+    @media(max-width:960px){
+      nav{padding:0 20px}.nav-links{display:none}.nav-logo{position:static;transform:none}
+      .hero{grid-template-columns:1fr}.hero-visual{min-height:55vw}.hero-content{padding:48px 24px;border-left:none;border-top:1px solid var(--border)}
+      .hollie-quote{grid-template-columns:1fr;padding:56px 24px;gap:32px}.hollie-quote-text{border-left:none;padding-left:0;border-top:1px solid var(--border);padding-top:28px}
+      .origin{grid-template-columns:1fr}.origin-visual{min-height:50vw}.origin-content{padding:48px 24px;border-left:none;border-top:1px solid var(--border)}
+      .print-philosophy{grid-template-columns:1fr;padding:56px 24px;gap:40px}.print-item{padding:0!important;border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:32px!important}
+      .print-item:last-child{border-bottom:none;padding-bottom:0!important}
+      .woman-section{grid-template-columns:1fr}.woman-visual{min-height:55vw}.woman-content{padding:48px 24px;border-left:none;border-top:1px solid var(--border)}
+      .craft-strip{grid-template-columns:1fr}.craft-item{border-right:none;border-bottom:1px solid var(--border)}.craft-item:last-child{border-bottom:none}
+      .newsletter{grid-template-columns:1fr;padding:56px 24px;gap:40px}
+      .copy-notes{padding:48px 24px}.notes-grid{grid-template-columns:1fr;gap:32px}
+      .before-after{padding:0 24px 48px}.ba-grid{grid-template-columns:1fr}
+      .footer-bar{padding:20px 24px;flex-direction:column;gap:10px;text-align:center}.footer-contact{align-items:center}
+    }
+    @media(max-width:640px){
+      .top-bar{padding:8px 16px;font-size:9px;line-height:1.5;letter-spacing:.08em;white-space:normal}
+      nav{justify-content:center;flex-wrap:wrap;min-height:88px;height:auto;padding:14px 22px;gap:10px}
+      .nav-logo{width:100%;text-align:center;font-size:21px;letter-spacing:.22em}
+      .nav-right{width:100%;justify-content:center;gap:18px;margin-left:0}
+      .nav-right a{font-size:10px;letter-spacing:.1em}
+      .hero{min-height:auto}
+      .hero-visual{display:none}
+      .hero-content{width:100%;max-width:100%;padding:50px 22px 54px;border-top:none;overflow:hidden}
+      .hero-content>*,.origin-content>*,.woman-content>*,.newsletter>*,.copy-notes>*,.before-after>*{max-width:100%}
+      .hero-headline,.hero-body,.section-headline,.section-body,.hollie-quote-text,.newsletter-body,.note-item p,.ba-text{overflow-wrap:break-word;word-break:normal}
+      .hollie-quote>*,.origin-content>*,.print-item,.woman-content>*,.craft-item>*,.newsletter>*,.notes-header,.notes-grid,.note-item,.before-after>*,.ba-grid,.ba-card{width:100%;max-width:346px}
+      .hero-overline,.section-label,.newsletter-label,.notes-badge,.ba-label,.hollie-eyebrow,.print-location{font-size:9px;letter-spacing:.2em}
+      .hero-headline{width:100%;max-width:346px;font-size:42px;line-height:1.04;margin-bottom:24px}
+      .hero-body{width:100%;max-width:346px;font-size:18px;line-height:1.72;margin-bottom:30px}
+      .hero-cta{display:grid;grid-template-columns:1fr;width:100%;max-width:346px;gap:16px;align-items:start}
+      .btn-ocean{width:100%;text-align:center;padding:14px 16px;font-size:9px;line-height:1.45;letter-spacing:.16em}
+      .btn-text{width:max-content;font-size:9px;letter-spacing:.16em}
+      .hollie-quote{padding:46px 22px;gap:26px}
+      .hollie-name{font-size:19px}
+      .hollie-title{font-size:10px;line-height:1.55;letter-spacing:.1em}
+      .hollie-quote-text{font-size:25px;line-height:1.34;padding-top:24px}
+      .origin-visual,.woman-visual{min-height:300px}
+      .origin-visual-word{left:22px;bottom:22px;font-size:58px}
+      .woman-visual-inner{padding:22px}
+      .woman-visual-tag{font-size:12px}
+      .origin-content,.woman-content{padding:42px 22px 46px}
+      .section-headline,.newsletter-headline{font-size:31px;line-height:1.13;margin-bottom:22px}
+      .section-body{font-size:17px;line-height:1.78;margin-bottom:18px}
+      .print-philosophy{padding:46px 22px;gap:30px}
+      .print-item{padding-bottom:28px!important}
+      .print-title,.craft-title{font-size:21px;margin-bottom:10px}
+      .print-body,.craft-body{font-size:16px;line-height:1.72}
+      .craft-item{padding:34px 22px}
+      .craft-icon{margin-bottom:16px}
+      .newsletter{padding:48px 22px;gap:30px}
+      .newsletter-body{font-size:16.5px;line-height:1.74}
+      .newsletter-form{gap:12px}
+      .newsletter-form input,.newsletter-form button{width:100%}
+      .newsletter-form input{font-size:16px;padding:14px 15px}
+      .newsletter-form button{min-height:48px;padding:14px 12px;font-size:9px;line-height:1.45;letter-spacing:.16em}
+      .copy-notes{padding:42px 22px}
+      .notes-header{display:block;margin-bottom:34px;padding-bottom:20px}
+      .notes-title{font-size:29px;line-height:1.1;margin-top:10px}
+      .notes-sub{margin-left:0;margin-top:4px}
+      .notes-grid{gap:30px}
+      .note-item h4{font-size:9px;line-height:1.5;letter-spacing:.15em}
+      .note-item p{font-size:16px;line-height:1.78}
+      .before-after{padding:0 22px 48px}
+      .ba-grid{gap:16px}
+      .ba-card{padding:24px 20px}
+      .ba-text{font-size:16px;line-height:1.72}
+      .ba-note{font-size:11px;line-height:1.62}
+      .footer-bar{padding:26px 22px;gap:9px}
+      .footer-note{max-width:280px;font-size:9px;line-height:1.6;letter-spacing:.12em}
+      .footer-email,.footer-website{font-size:11px}
+    }
+    @media(max-width:380px){
+      nav{padding:14px 18px;row-gap:10px}
+      .hero-headline{font-size:38px}
+      .hero-headline,.hero-body,.hero-cta{max-width:316px}
+      .hollie-quote>*,.origin-content>*,.print-item,.woman-content>*,.craft-item>*,.newsletter>*,.notes-header,.notes-grid,.note-item,.before-after>*,.ba-grid,.ba-card{max-width:316px}
+      .hollie-quote-text{font-size:23px}
+      .origin-visual-word{font-size:50px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">Free shipping on orders over $300 Australia wide</div>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#">New Arrivals</a></li>
+      <li><a href="#">Shop</a></li>
+      <li><a href="#">Dresses</a></li>
+      <li><a href="#">Prints</a></li>
+    </ul>
+    <div class="nav-logo">Roame.</div>
+    <ul class="nav-right">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Bag</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-visual">
+      <div class="hero-visual-inner"></div>
+      <div class="hero-visual-overlay"></div>
+      <div class="hero-visual-caption">Summer Souvenirs, 2026</div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-overline">About</div>
+      <h1 class="hero-headline">A creative journey<br>capturing<br><em>a moment in time.</em></h1>
+      <p class="hero-body">Every ROAME collection begins the same way. A place. A memory. A particular quality of light at a specific hour in a city Hollie has loved. The clothes are made to carry that feeling, so the woman wearing them carries it too.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn-ocean">Shop the Collection</a>
+        <a href="#" class="btn-text">View the Prints</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hollie-quote">
+    <div class="hollie-left">
+      <div class="hollie-eyebrow">Founder</div>
+      <div class="hollie-name">Hollie Sweet</div>
+      <div class="hollie-title">Co-Founder and Creative Director</div>
+    </div>
+    <div class="hollie-quote-text">"The ROAME collections are rooted in the spirit of travel. Our bespoke prints are a creative journey capturing a moment in time. Each one tells the story of a place, a feeling, a particular kind of afternoon you want to return to."</div>
+  </div>
+
+  <section class="origin">
+    <div class="origin-visual">
+      <div class="origin-visual-inner"></div>
+      <div class="origin-visual-word">Roame.</div>
+    </div>
+    <div class="origin-content">
+      <div class="section-label">The Beginning</div>
+      <h2 class="section-headline">Melbourne elegance.<br><em>Los Angeles ease.</em><br>A world in between.</h2>
+      <p class="section-body">Hollie Sweet spent over 15 years in the fashion industry, including running one of Australia's most respected premium fashion agencies. She understood how clothes were made, how they were sold, and what was consistently missing: resort wear with genuine creative ambition behind it.</p>
+      <p class="section-body"><strong>ROAME was the answer to that gap.</strong> A Melbourne-based label designed for women who move between places and want their wardrobe to move with them. Each collection is a chapter. Each print is a specific place, rendered in cloth so you can wear it long after the trip is over.</p>
+      <p class="section-body">The name says everything. Not tourist, not traveller. Something freer than both. Someone who goes where the feeling takes them and dresses accordingly.</p>
+    </div>
+  </section>
+
+  <div class="print-philosophy">
+    <div class="print-item">
+      <div class="print-location">St Germain, Paris</div>
+      <div class="print-title">The Scarf Print</div>
+      <p class="print-body">A tribute to the Cafe de Flore. The rattan texture of the classic French green bistro chairs, the hour where coffee becomes wine and nobody is in a hurry.</p>
+    </div>
+    <div class="print-item">
+      <div class="print-location">Corsica, France</div>
+      <div class="print-title">Vacances Print</div>
+      <p class="print-body">Plage du Petit Sperone on a sun-drenched afternoon. Each motif captures the spirit of a vacation that feels like it belongs to you specifically.</p>
+    </div>
+    <div class="print-item">
+      <div class="print-location">Everywhere you have been</div>
+      <div class="print-title">Summer Souvenirs</div>
+      <p class="print-body">A whole collection built on the idea that the best things you bring home are the ones you wear. Pieces designed to carry the memory of a place long after you leave it.</p>
+    </div>
+  </div>
+
+  <section class="woman-section">
+    <div class="woman-visual">
+      <div class="woman-visual-inner">
+        <div class="woman-visual-tag">ROAME. Resort 2026</div>
+      </div>
+    </div>
+    <div class="woman-content">
+      <div class="section-label">The ROAME Woman</div>
+      <h2 class="section-headline">She dresses like<br>her holiday self<br><em>more often.</em></h2>
+      <p class="section-body">She has a passport with real stamps in it. She knows the difference between tourist and traveller and she prefers neither word. She collects places the way other people collect things, and she wants her wardrobe to reflect that.</p>
+      <p class="section-body"><strong>She is not dressing for an occasion.</strong> She is dressing for the kind of life where occasion and everyday blur together. For the dinner that starts on the terrace and moves somewhere unexpected. For the trip that turns into something more. ROAME was made for her and for the particular ease that comes from wearing something that already knows how to travel.</p>
+    </div>
+  </section>
+
+  <div class="craft-strip">
+    <div class="craft-item">
+      <div class="craft-icon"></div>
+      <div class="craft-title">Hand-Drawn Prints</div>
+      <p class="craft-body">Every ROAME print begins by hand. Developed specifically for each collection, drawn to capture a feeling rather than a trend. Unique by design.</p>
+    </div>
+    <div class="craft-item">
+      <div class="craft-icon"></div>
+      <div class="craft-title">Artful Detailing</div>
+      <p class="craft-body">The finishing. The placement of a print on a silhouette. The weight of a fabric against the body on a warm afternoon. These are the decisions that make the difference.</p>
+    </div>
+    <div class="craft-item">
+      <div class="craft-icon"></div>
+      <div class="craft-title">Made for Movement</div>
+      <p class="craft-body">Every piece is designed to be worn and to travel. From Melbourne to Corsica to the lunch you did not plan. ROAME clothing goes where you go.</p>
+    </div>
+  </div>
+
+  <section class="newsletter">
+    <div>
+      <div class="newsletter-label">Stay close to ROAME</div>
+      <h2 class="newsletter-headline">New collections.<br><em>The stories behind the prints.</em></h2>
+      <p class="newsletter-body">New arrivals, the places that inspired each season, and early access before pieces sell out. Written for the women who want to know where the clothes came from before they decide where to wear them.</p>
+    </div>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Your email address">
+      <button type="submit">Join the Journey</button>
+      <p class="newsletter-note">New collections and stories. No clutter. Unsubscribe whenever you like.</p>
+    </div>
+  </section>
+
+  <section class="copy-notes">
+    <div class="notes-header">
+      <div class="notes-badge">The Silk Pen</div>
+      <div class="notes-title">Copywriter's Notes</div>
+      <div class="notes-sub">What changed and why</div>
+    </div>
+    <div class="notes-grid">
+      <div class="note-item">
+        <h4>The Hero</h4>
+        <p>The live ROAME About page opens with: "Ever-cool, passionate, and free-spirited, ROAME. is an Australian ready-to-wear label that transports the individual to wistful travel memories and new horizons." That is a category description written as a brand statement. Hollie's own words to a stockist are far more specific and far more evocative: "our bespoke prints are a creative journey capturing a moment in time." The rewrite leads with that line because it is the most honest and specific thing said publicly about what ROAME actually does. Specificity converts. Wanderlust clichés do not.</p>
+      </div>
+      <div class="note-item">
+        <h4>The Print Philosophy Section</h4>
+        <p>The Scarf Print is a tribute to St Germain and the Cafe de Flore. The Vacances Print takes you to Plage du Petit Sperone in Corsica. These are not vague resort vibes. They are specific places with specific feelings attached to them. The current About page copy is entirely generic about the prints. The rewrite gives each print its own moment because that specificity is the brand's strongest asset. Anyone can say "tells tales of distant shores." Almost no one can say "the rattan texture of the classic French green bistro chair at four in the afternoon."</p>
+      </div>
+      <div class="note-item">
+        <h4>The Hollie Quote</h4>
+        <p>Hollie Sweet does not appear anywhere on the current ROAME website. There is no founder presence, no personal voice, no sense of who built this brand or why. Yet Hollie has 15 years of industry experience through The LOFFT Fashion Agency and a clear, specific creative sensibility. The rewrite surfaces her directly as the voice behind the brand. At this price point and positioning, founder presence is a conversion asset. Customers want to know who made the decisions. The current site does not tell them.</p>
+      </div>
+      <div class="note-item">
+        <h4>The Newsletter</h4>
+        <p>"JOIN OUR NEWSLETTER FOR 15% OFF YOUR FIRST ORDER" is the current newsletter offer. For a brand whose prints are specific tributes to Paris cafes and Corsican beaches, a 15% discount as the newsletter hook is a significant mismatch. The rewrite positions the newsletter as access to the stories behind each print and early access to new arrivals. "Written for the women who want to know where the clothes came from before they decide where to wear them" speaks directly to the ROAME customer. She is buying a story as much as a dress. The newsletter should tell it.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="before-after">
+    <div class="ba-label">Before and After: The About Opening</div>
+    <div class="ba-grid">
+      <div class="ba-card">
+        <span class="ba-tag before">Live copy</span>
+        <p class="ba-text">"Ever-cool, passionate, and free-spirited, ROAME. is an Australian ready-to-wear label that transports the individual to wistful travel memories and new horizons. Let the eternal vacation begin."</p>
+        <div class="ba-note">Category language dressed up as brand voice. "Wistful travel memories" and "eternal vacation" are phrases that appear on hundreds of resort wear sites. The copy could belong to anyone.</div>
+      </div>
+      <div class="ba-card">
+        <span class="ba-tag after">Rewrite</span>
+        <p class="ba-text">"Every ROAME collection begins the same way. A place. A memory. A particular quality of light at a specific hour in a city Hollie has loved. The clothes are made to carry that feeling, so the woman wearing them carries it too."</p>
+        <div class="ba-note">Grounds the brand in a specific creative process. Names the founder. Makes the purpose of the clothes felt rather than stated. Could only be ROAME.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-brand">The Silk Pen</div>
+    <div class="footer-note">Copy sample prepared for ROAME.</div>
+    <div class="footer-contact">
+      <a href="mailto:hello@thesilkpen.in" class="footer-email">hello@thesilkpen.in</a>
+      <a href="https://thesilkpen.in" target="_blank" class="footer-website">thesilkpen.in</a>
+    </div>
+  </div>
+
+</body>
+</html>
